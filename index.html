@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f8f9ff">
+    <meta
+      name="description"
+      content="AI-native Meetup Moscow — офлайн-встреча об AI-инструментах, работе IT-команд и честном опыте создания B2B SaaS. 7 ноября 2026 года."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:title" content="AI-native Meetup Moscow — 7 ноября 2026">
+    <meta
+      property="og:description"
+      content="Практический офлайн-митап об AI-native командах, современных AI-инструментах и B2B SaaS."
+    >
+    <meta property="og:image" content="assets/hero-moscow.webp">
+    <title>AI-native Meetup Moscow — 7 ноября 2026</title>
+    <link rel="icon" href="assets/brand-mark.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">К основному содержанию</a>
+
+    <header class="site-header" data-site-header>
+      <div class="container header-inner">
+        <a class="brand" href="#event" aria-label="AI-native Meetup Moscow — на главную">
+          <img class="brand-mark" src="assets/brand-mark.svg" alt="" width="42" height="42">
+          <span class="brand-copy">
+            <strong>AI-native</strong>
+            <span>Moscow Meetup</span>
+          </span>
+        </a>
+
+        <button
+          class="menu-button"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          aria-label="Открыть меню"
+          data-menu-button
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="site-nav" id="site-nav" aria-label="Основная навигация" data-site-nav>
+          <a href="#event">О событии</a>
+          <a href="#speakers">Спикеры</a>
+          <a href="#program">Программа</a>
+          <a href="#registration">Регистрация</a>
+          <a href="#venue">Контакты</a>
+        </nav>
+
+        <a class="button button-small js-timepad header-cta" href="#registration">
+          Купить билет — 2 000 ₽
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="event" aria-labelledby="event-title">
+        <div class="hero-backdrop" aria-hidden="true"></div>
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow hero-reveal" style="--reveal-order: 0">Офлайн-митап в Москве</p>
+            <h1 class="hero-title hero-reveal" id="event-title" style="--reveal-order: 1">
+              AI-native<br>
+              <span>Meetup Moscow</span>
+            </h1>
+            <p class="hero-lead hero-reveal" style="--reveal-order: 2">
+              Честный разговор о том, как AI меняет работу IT-команд, какие инструменты уже дают
+              результат и каких ошибок избегать при создании B2B SaaS.
+            </p>
+
+            <ul class="event-facts hero-reveal" style="--reveal-order: 3" aria-label="Основная информация">
+              <li>
+                <span class="fact-icon" aria-hidden="true">◫</span>
+                <span><strong>7 ноября 2026</strong><small>суббота</small></span>
+              </li>
+              <li>
+                <span class="fact-icon" aria-hidden="true">◷</span>
+                <span><strong>12:30</strong><small>сбор с 12:00</small></span>
+              </li>
+              <li>
+                <span class="fact-icon" aria-hidden="true">⌖</span>
+                <span><strong>Москва</strong><small>Photoplay</small></span>
+              </li>
+              <li>
+                <span class="fact-icon" aria-hidden="true">₽</span>
+                <span><strong>2 000 ₽</strong><small>один билет</small></span>
+              </li>
+            </ul>
+
+            <div class="hero-address hero-reveal" style="--reveal-order: 4">
+              <span class="address-pin" aria-hidden="true">●</span>
+              <div>
+                <a href="https://photoplay.ru/" target="_blank" rel="noopener noreferrer">
+                  Каланчевская улица, 17, 1-й подъезд, 6-й этаж
+                </a>
+                <span><b class="metro-icon">М</b> «Комсомольская», «Красные Ворота»</span>
+              </div>
+            </div>
+
+            <div class="hero-actions hero-reveal" style="--reveal-order: 5">
+              <a class="button js-timepad" href="#registration">
+                Купить билет
+                <span aria-hidden="true">↗</span>
+              </a>
+              <a class="button button-secondary" href="#program">
+                Смотреть программу
+                <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+          </div>
+
+          <aside class="hero-card hero-reveal" style="--reveal-order: 3" aria-labelledby="hero-card-title">
+            <div class="hero-card-topline">
+              <span>AI / команды / продукты</span>
+              <span aria-hidden="true">✦</span>
+            </div>
+            <h2 id="hero-card-title">Один день.<br>Три честных разговора.</h2>
+            <p>
+              Без продаж со сцены и общих слов. Только практика, разбор решений и живое общение с теми,
+              кто внедряет AI в реальную работу.
+            </p>
+            <dl class="hero-card-meta">
+              <div><dt>Дата</dt><dd>7 ноября</dd></div>
+              <div><dt>Начало</dt><dd>12:30</dd></div>
+              <div><dt>Формат</dt><dd>Офлайн</dd></div>
+            </dl>
+            <a class="button button-block js-timepad" href="#registration">
+              Занять место — 2 000 ₽
+              <span aria-hidden="true">→</span>
+            </a>
+            <small>Оплата и электронный билет через Timepad</small>
+          </aside>
+
+          <p class="hero-note" aria-hidden="true">
+            Больше,<br>чем митап
+            <span>↘</span>
+          </p>
+        </div>
+      </section>
+
+      <section class="section speakers-section" id="speakers" aria-labelledby="speakers-title">
+        <div class="container">
+          <div class="section-heading split-heading">
+            <div>
+              <p class="eyebrow">Спикеры</p>
+              <h2 id="speakers-title">Эксперты<br>из реальной практики</h2>
+            </div>
+            <p>
+              Без длинных регалий. Опыт людей, которые проектируют системы, развивают команды и
+              запускают образовательные продукты.
+            </p>
+          </div>
+
+          <div class="speaker-grid">
+            <article class="speaker-card">
+              <div class="speaker-photo speaker-photo-gleb">
+                <img src="Глеб спикер.jpg" alt="Глеб Учитель" width="512" height="512" loading="lazy">
+              </div>
+              <div class="speaker-content">
+                <p class="speaker-number">01 / практика и обучение</p>
+                <h3>Глеб Учитель</h3>
+                <div class="speaker-links" aria-label="Ссылки Глеба">
+                  <a
+                    href="https://stepik.org/users/glebteach/teach?auth=login&amp;quiz_only=true"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >Stepik ↗</a>
+                  <a href="https://glebteach.ru/" target="_blank" rel="noopener noreferrer">glebteach.ru ↗</a>
+                </div>
+                <p>
+                  Более 7 лет в IT: от вебмастера до тимлида команды аналитиков. Сейчас вместе с
+                  командой создаёт курсы для внутреннего и внешнего обучения. Преподаватели —
+                  системные и бизнес-аналитики уровня Middle/Senior с опытом проектов ВТБ,
+                  Альфа-Банка и VK.
+                </p>
+              </div>
+            </article>
+
+            <article class="speaker-card">
+              <div class="speaker-photo speaker-photo-roman">
+                <img
+                  src="Роман спикер.jpg"
+                  alt="Роман Краснослабодцев"
+                  width="3840"
+                  height="5760"
+                  loading="lazy"
+                >
+              </div>
+              <div class="speaker-content">
+                <p class="speaker-number">02 / архитектура и продукты</p>
+                <h3>Роман Краснослабодцев</h3>
+                <div class="speaker-links" aria-label="Ссылки Романа">
+                  <a
+                    href="https://stepik.org/users/484739266/teach"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >Stepik ↗</a>
+                </div>
+                <p>
+                  Более 10 лет в IT: от junior-разработчика до техлида и архитектора. Работал над
+                  проектами Альфа-Банка, Т-Банка, ПСБ и других компаний. Делится практическим опытом
+                  построения команд, архитектуры и AI-native разработки.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section program-section" id="program" aria-labelledby="program-title">
+        <div class="container">
+          <div class="section-heading split-heading program-heading">
+            <div>
+              <p class="eyebrow">Программа</p>
+              <h2 id="program-title">План митапа</h2>
+            </div>
+            <p>Насыщенная программа, живые кейсы и достаточно времени для вопросов и общения.</p>
+          </div>
+
+          <div class="program-layout">
+            <ol class="timeline">
+              <li>
+                <time datetime="2026-11-07T12:00:00+03:00">12:00</time>
+                <div><h3>Сбор гостей</h3><p>Знакомимся, берём кофе и устраиваемся.</p></div>
+              </li>
+              <li>
+                <time datetime="2026-11-07T12:30:00+03:00">12:30–12:40</time>
+                <div><h3>Открытие</h3><p>Коротко о формате, программе и участниках.</p></div>
+              </li>
+              <li>
+                <time datetime="2026-11-07T12:40:00+03:00">12:40–13:30</time>
+                <div><h3>Как меняется работа IT-команды в эпоху AI-native</h3></div>
+              </li>
+              <li>
+                <time datetime="2026-11-07T13:30:00+03:00">13:30–14:30</time>
+                <div><h3>Обзор AI-инструментов: SOTA-модели, harness, агенты, RAG, MCP и Skills</h3></div>
+              </li>
+              <li class="timeline-break">
+                <time datetime="2026-11-07T14:30:00+03:00">14:30–15:05</time>
+                <div><h3>Кофе-брейк</h3><p>Перерыв, знакомства и обсуждение первых докладов.</p></div>
+              </li>
+              <li>
+                <time datetime="2026-11-07T15:05:00+03:00">15:05–15:50</time>
+                <div><h3>Как не надо делать B2B SaaS: ошибки на примере реального проекта</h3></div>
+              </li>
+              <li>
+                <time datetime="2026-11-07T15:50:00+03:00">15:50–16:20</time>
+                <div><h3>Разбор задач участников и открытый микрофон</h3></div>
+              </li>
+              <li>
+                <time datetime="2026-11-07T16:20:00+03:00">16:20–16:30</time>
+                <div><h3>Завершение</h3><p>Подводим итоги и обмениваемся контактами.</p></div>
+              </li>
+              <li>
+                <time datetime="2026-11-07T16:30:00+03:00">16:30–17:20</time>
+                <div><h3>Нетворкинг и свободное общение со спикерами</h3></div>
+              </li>
+            </ol>
+
+            <aside class="price-card" aria-labelledby="price-title">
+              <p class="eyebrow">Стоимость участия</p>
+              <h3 id="price-title">2 000 ₽</h3>
+              <p>Полная программа, кофе-брейк, разбор задач и живое общение с IT-сообществом.</p>
+              <ul>
+                <li>Один участник</li>
+                <li>Электронный билет</li>
+                <li>Оплата через Timepad</li>
+              </ul>
+              <a class="button button-block js-timepad" href="#registration">
+                Занять место
+                <span aria-hidden="true">→</span>
+              </a>
+            </aside>
+          </div>
+
+          <div class="benefit-strip" aria-label="Что ждёт участников">
+            <div><span aria-hidden="true">◉</span><strong>Живые доклады</strong></div>
+            <div><span aria-hidden="true">✦</span><strong>Разбор ваших задач</strong></div>
+            <div><span aria-hidden="true">⌘</span><strong>Нетворкинг</strong></div>
+            <div><span aria-hidden="true">◒</span><strong>Кофе-брейк</strong></div>
+            <a class="button js-timepad" href="#registration">Занять место <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section registration-section" id="registration" aria-labelledby="registration-title">
+        <div class="container registration-layout">
+          <div class="registration-copy">
+            <p class="eyebrow">Регистрация и оплата</p>
+            <h2 id="registration-title">Забронируйте<br>своё участие</h2>
+            <p>
+              После открытия продаж кнопка переведёт вас в защищённую форму Timepad. Там можно будет
+              заполнить данные, оплатить участие и получить электронный билет.
+            </p>
+          </div>
+
+          <div class="ticket-card" aria-label="Информация о билете">
+            <div class="ticket-stub" aria-hidden="true">
+              <img src="assets/brand-mark.svg" alt="" width="38" height="38">
+              <span>AI-native<br>Meetup</span>
+            </div>
+            <div class="ticket-details">
+              <p class="ticket-label">Ваш билет</p>
+              <h3>AI-native Meetup Moscow</h3>
+              <dl>
+                <div><dt>Дата</dt><dd>7 ноября 2026</dd></div>
+                <div><dt>Время</dt><dd>12:30–17:20</dd></div>
+                <div><dt>Место</dt><dd>Photoplay, Москва</dd></div>
+              </dl>
+            </div>
+            <div class="ticket-total">
+              <span>Итого</span>
+              <strong>2 000 ₽</strong>
+              <a class="button button-block js-timepad" href="#registration">
+                Перейти к оплате
+                <span aria-hidden="true">→</span>
+              </a>
+              <small>Оплата и билет — на стороне Timepad</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section venue-section" id="venue" aria-labelledby="venue-title">
+        <div class="container">
+          <div class="venue-layout">
+            <div class="venue-copy">
+              <p class="eyebrow">Как добраться</p>
+              <h2 id="venue-title">Место проведения</h2>
+              <p class="venue-name">Photoplay</p>
+              <address>
+                Москва, Каланчевская улица, 17<br>
+                1-й подъезд, 6-й этаж
+              </address>
+              <div class="metro-list">
+                <span><b>М</b> Комсомольская</span>
+                <span><b>М</b> Красные Ворота</span>
+              </div>
+              <div class="venue-actions">
+                <a
+                  class="button button-secondary"
+                  href="https://yandex.ru/maps/?rtext=~55.773020%2C37.651640&amp;rtt=mt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Построить маршрут
+                  <span aria-hidden="true">↗</span>
+                </a>
+                <a href="https://photoplay.ru/" target="_blank" rel="noopener noreferrer">Сайт площадки ↗</a>
+              </div>
+            </div>
+
+            <div class="map-card">
+              <iframe
+                src="https://yandex.ru/map-widget/v1/?ll=37.651640%2C55.773020&amp;z=17&amp;pt=37.651640%2C55.773020%2Cpm2rdm"
+                title="Яндекс Карта: Photoplay, Каланчевская улица, 17"
+                loading="lazy"
+                allowfullscreen
+              ></iframe>
+              <div class="map-badge" aria-hidden="true">
+                <img src="assets/brand-mark.svg" alt="" width="32" height="32">
+                <span><strong>Photoplay</strong>Каланчевская, 17</span>
+              </div>
+            </div>
+          </div>
+          <p class="venue-note" aria-hidden="true">Удобно приехать<br>из любой части Москвы ↙</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-main">
+        <a class="brand" href="#event" aria-label="AI-native Meetup Moscow — наверх">
+          <img class="brand-mark" src="assets/brand-mark.svg" alt="" width="42" height="42">
+          <span class="brand-copy"><strong>AI-native</strong><span>Moscow Meetup</span></span>
+        </a>
+        <p><strong>AI-native Meetup Moscow</strong><span>Практический офлайн-митап для IT-сообщества</span></p>
+        <div class="footer-facts">
+          <span>7 ноября 2026 · 12:30</span>
+          <span>Москва, Каланчевская улица, 17</span>
+        </div>
+        <a class="button js-timepad" href="#registration">Купить билет <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="container footer-bottom">
+        <span>© <span data-current-year>2026</span> AI-native Meetup</span>
+        <nav aria-label="Навигация в подвале">
+          <a href="#speakers">Спикеры</a>
+          <a href="#program">Программа</a>
+          <a href="#registration">Регистрация</a>
+          <a href="#venue">Контакты</a>
+        </nav>
+        <span>Персональные данные обрабатывает Timepad</span>
+      </div>
+    </footer>
+
+    <div class="toast" role="status" aria-live="polite" aria-atomic="true" data-toast hidden></div>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
