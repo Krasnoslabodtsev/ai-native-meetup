@@ -22,3 +22,12 @@ test('uses the supplied speaker photos and Yandex map', () => {
   assert.ok(html.includes('Роман спикер.jpg'));
   assert.match(html, /yandex\.ru\/map-widget/);
 });
+
+test('includes responsive and accessibility states', async () => {
+  const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+
+  assert.match(css, /@media\s*\(max-width:/);
+  assert.match(css, /prefers-reduced-motion/);
+  assert.match(css, /:focus-visible/);
+  assert.match(css, /--color-accent:/);
+});
