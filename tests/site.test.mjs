@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
@@ -17,9 +17,11 @@ test('contains confirmed event facts', () => {
   }
 });
 
-test('uses the supplied speaker photos and Yandex map', () => {
+test('uses the supplied speaker photos and Yandex map', async () => {
   assert.ok(html.includes('Глеб спикер.jpg'));
-  assert.ok(html.includes('Роман спикер.jpg'));
+  assert.ok(html.includes('assets/roman-speaker.webp'));
+  assert.ok(!html.includes('Роман спикер.jpg'));
+  await access(new URL('../assets/roman-speaker.webp', import.meta.url));
   assert.match(html, /yandex\.ru\/map-widget/);
 });
 
@@ -55,10 +57,31 @@ test('does not use generic promotional filler', () => {
   }
 });
 
+test('keeps supporting copy concise and links to the official Timepad policy', () => {
+  for (const phrase of [
+    'Оплата и билет — на стороне Timepad',
+    'Опыт спикеров',
+    'Глеб строит обучение для аналитиков',
+    'Продажи откроются после публикации события',
+    'Сайт площадки',
+    'Персональные данные обрабатывает Timepad',
+  ]) {
+    assert.ok(!html.includes(phrase), `obsolete copy remains: ${phrase}`);
+  }
+
+  assert.match(html, /Наши\s*<br>\s*спикеры/);
+  assert.ok(html.includes('https://timepad.ru/upload/docs/TimePad_PD_Polices.pdf'));
+
+  const benefits = html.slice(html.indexOf('<div class="benefit-strip"'), html.indexOf('</section>', html.indexOf('<div class="benefit-strip"')));
+  assert.ok(benefits.includes('Открытый микрофон'));
+  assert.ok(!benefits.includes('Кофе-брейк'));
+});
+
 test('gives the registration heading enough space and contains the map grid', async () => {
   const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
 
   assert.match(css, /\.registration-layout\s*\{[\s\S]*?grid-template-columns:\s*minmax\(380px,/);
   assert.match(css, /\.venue-layout\s*>\s*\*\s*\{[\s\S]*?min-width:\s*0;/);
   assert.match(css, /\.price-card h3\s*\{[\s\S]*?white-space:\s*nowrap;/);
+  assert.match(css, /\.hero-backdrop\s*\{[\s\S]*?transform:\s*scale\(1\.16\);/);
 });
