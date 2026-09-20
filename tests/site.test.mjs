@@ -31,3 +31,34 @@ test('includes responsive and accessibility states', async () => {
   assert.match(css, /:focus-visible/);
   assert.match(css, /--color-accent:/);
 });
+
+test('opens the mobile navigation when the data-open attribute is present', async () => {
+  const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+
+  assert.match(css, /\.site-nav\[data-open\]\s*\{/);
+});
+
+test('keeps registration calls to action restrained', () => {
+  assert.equal(html.match(/js-timepad/g)?.length, 3);
+});
+
+test('does not use generic promotional filler', () => {
+  for (const phrase of [
+    'Честный разговор',
+    'Без продаж со сцены',
+    'Насыщенная программа',
+    'живые кейсы',
+    'Полная программа',
+    'Больше,',
+  ]) {
+    assert.ok(!html.includes(phrase), `generic phrase remains: ${phrase}`);
+  }
+});
+
+test('gives the registration heading enough space and contains the map grid', async () => {
+  const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+
+  assert.match(css, /\.registration-layout\s*\{[\s\S]*?grid-template-columns:\s*minmax\(380px,/);
+  assert.match(css, /\.venue-layout\s*>\s*\*\s*\{[\s\S]*?min-width:\s*0;/);
+  assert.match(css, /\.price-card h3\s*\{[\s\S]*?white-space:\s*nowrap;/);
+});
