@@ -1,6 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { extractTimepadEventId, getRegistrationMode } from '../script.js';
+import { TIMEPAD_EVENT_URL, extractTimepadEventId, getRegistrationMode } from '../script.js';
+
+test('uses the published meetup for live registration', () => {
+  assert.equal(TIMEPAD_EVENT_URL, 'https://ai-v-dele.timepad.ru/event/4211218/');
+  assert.equal(getRegistrationMode(TIMEPAD_EVENT_URL), 'live');
+});
 
 test('extracts an event id from an organization URL', () => {
   assert.equal(

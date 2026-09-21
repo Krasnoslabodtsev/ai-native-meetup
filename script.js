@@ -1,6 +1,4 @@
-// После создания события вставьте сюда его полный URL вида:
-// https://your-organization.timepad.ru/event/1234567/
-export const TIMEPAD_EVENT_URL = '';
+export const TIMEPAD_EVENT_URL = 'https://ai-v-dele.timepad.ru/event/4211218/';
 
 export function extractTimepadEventId(url) {
   const match = String(url)
