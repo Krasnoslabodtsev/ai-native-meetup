@@ -65,24 +65,36 @@ function createToast() {
 function loadTimepadWidget(eventId, showToast) {
   if (document.querySelector('[data-timepad-widget-v2="event_register"]')) return;
 
+  const config = {
+    event: { id: eventId },
+    hidePreloading: true,
+    display: 'popup',
+    popup: {
+      triggerSelector: '.js-timepad',
+      width: 640,
+      padding: 0,
+      autoShrink: true,
+      minViewport: 320,
+      outerClose: false,
+      closeColor: '#10113d',
+      addCss: {
+        border: '1px solid rgba(95, 82, 255, 0.18)',
+        borderRadius: '24px',
+        boxShadow: '0 30px 100px rgba(16, 17, 61, 0.28)',
+        overflow: 'hidden',
+      },
+    },
+    loadCSS: [new URL('timepad-widget.css', document.baseURI).href],
+    locale: 'ru',
+    utmForward: true,
+  };
   const script = document.createElement('script');
   script.type = 'text/javascript';
   script.defer = true;
   script.charset = 'UTF-8';
   script.dataset.timepadWidgetV2 = 'event_register';
   script.src = 'https://timepad.ru/js/tpwf/loader/min/loader.js';
-  script.textContent = `
-    (function () {
-      return {
-        event: { id: "${eventId}" },
-        hidePreloading: true,
-        display: "popup",
-        popup: { triggerSelector: ".js-timepad" },
-        locale: "ru",
-        utmForward: true
-      };
-    })();
-  `;
+  script.textContent = `(function () { return ${JSON.stringify(config)}; })();`;
   script.addEventListener('error', () => {
     showToast('Не удалось загрузить форму. Откроется страница события на Timepad.');
   });

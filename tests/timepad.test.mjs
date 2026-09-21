@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { access } from 'node:fs/promises';
 import { TIMEPAD_EVENT_URL, extractTimepadEventId, getRegistrationMode } from '../script.js';
 
 test('uses the published meetup for live registration', () => {
@@ -30,4 +31,52 @@ test('rejects an empty or malformed event URL', () => {
 
 test('marks a valid event URL live', () => {
   assert.equal(getRegistrationMode('https://org.timepad.ru/event/1234567/'), 'live');
+});
+
+test('loads the branded stylesheet into the live Timepad popup', async () => {
+  const links = [{ href: '', addEventListener() {} }];
+  let widgetScript;
+
+  globalThis.window = {
+    clearTimeout() {},
+    setTimeout() {},
+  };
+  globalThis.document = {
+    baseURI: 'https://example.github.io/ai-native-meetup/',
+    documentElement: { dataset: {} },
+    head: {
+      append(element) {
+        widgetScript = element;
+      },
+    },
+    createElement() {
+      return {
+        dataset: {},
+        addEventListener() {},
+      };
+    },
+    querySelector() {
+      return null;
+    },
+    querySelectorAll(selector) {
+      return selector === '.js-timepad' ? links : [];
+    },
+  };
+
+  try {
+    await import(`../script.js?styled-widget=${Date.now()}`);
+    const config = Function(`return ${widgetScript.textContent.trim()}`)();
+
+    assert.deepEqual(config.loadCSS, [
+      'https://example.github.io/ai-native-meetup/timepad-widget.css',
+    ]);
+    assert.equal(config.popup.width, 640);
+    assert.equal(config.popup.padding, 0);
+    assert.equal(config.popup.margins, undefined);
+    assert.equal(config.popup.outerClose, false);
+    await assert.doesNotReject(access(new URL('../timepad-widget.css', import.meta.url)));
+  } finally {
+    delete globalThis.document;
+    delete globalThis.window;
+  }
 });
