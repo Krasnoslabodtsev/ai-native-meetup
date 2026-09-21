@@ -419,6 +419,7 @@ a {
 }
 
 .hero-title span {
+  padding-right: 0.08em;
   color: transparent;
   background: linear-gradient(100deg, var(--color-accent-deep) 5%, #7461ff 55%, #8177ff 100%);
   background-clip: text;
