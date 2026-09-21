@@ -136,6 +136,7 @@ function loadTimepadWidget(eventId, showToast) {
         opacity: '0.82',
       },
       addCss: {
+        boxSizing: 'border-box',
         border: '1px solid rgba(229, 231, 243, 0.9)',
         borderRadius: '20px',
         boxShadow: '0 32px 100px rgba(6, 9, 24, 0.42)',

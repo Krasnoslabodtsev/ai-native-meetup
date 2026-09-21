@@ -92,6 +92,7 @@ test('loads the branded stylesheet into the live Timepad popup', async () => {
     assert.equal(config.popup.tintColor, 'rgba(13, 16, 34, 0.9)');
     assert.equal(config.popup.closeCss.top, '26px');
     assert.equal(config.popup.closeCss.right, '28px');
+    assert.equal(config.popup.addCss.boxSizing, 'border-box');
     assert.equal(config.popup.addCss.transition, 'none');
     assert.deepEqual(config.bindEvents, { postRepaint: 'styleAiNativeTimepadForm' });
 
