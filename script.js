@@ -62,29 +62,89 @@ function createToast() {
   };
 }
 
+function styleAiNativeTimepadForm() {
+  const placeholders = {
+    'input[name$="[mail]"]': 'example@mail.ru',
+    'input[name$="[surname]"]': 'Иванов',
+    'input[name$="[name]"]': 'Иван',
+  };
+
+  Object.entries(placeholders).forEach(([selector, placeholder]) => {
+    this.$$(selector).attr('placeholder', placeholder);
+  });
+}
+
+function isTimepadWidgetReady() {
+  try {
+    return Boolean(window.TWF2?.getWidget?.()?.isReady);
+  } catch {
+    return false;
+  }
+}
+
+function openTimepadWhenReady(link, showToast) {
+  if (link.dataset.timepadPending === 'true') return;
+
+  link.dataset.timepadPending = 'true';
+  showToast('Открываем форму регистрации…');
+  let attempts = 0;
+
+  const retry = () => {
+    if (isTimepadWidgetReady()) {
+      delete link.dataset.timepadPending;
+      link.click();
+      return;
+    }
+
+    attempts += 1;
+    if (attempts >= 100) {
+      delete link.dataset.timepadPending;
+      window.location.assign(TIMEPAD_EVENT_URL);
+      return;
+    }
+
+    window.setTimeout(retry, 50);
+  };
+
+  retry();
+}
+
 function loadTimepadWidget(eventId, showToast) {
   if (document.querySelector('[data-timepad-widget-v2="event_register"]')) return;
 
+  window.styleAiNativeTimepadForm = styleAiNativeTimepadForm;
   const config = {
     event: { id: eventId },
-    hidePreloading: true,
+    hidePreloading: false,
     display: 'popup',
     popup: {
       triggerSelector: '.js-timepad',
-      width: 640,
+      width: 860,
       padding: 0,
       autoShrink: true,
       minViewport: 320,
+      tintColor: 'rgba(13, 16, 34, 0.9)',
       outerClose: false,
-      closeColor: '#10113d',
+      closeColor: '#30365d',
+      closeCss: {
+        top: '26px',
+        right: '28px',
+        height: '32px',
+        fontSize: '40px',
+        fontWeight: '300',
+        lineHeight: '28px',
+        opacity: '0.82',
+      },
       addCss: {
-        border: '1px solid rgba(95, 82, 255, 0.18)',
-        borderRadius: '24px',
-        boxShadow: '0 30px 100px rgba(16, 17, 61, 0.28)',
+        border: '1px solid rgba(229, 231, 243, 0.9)',
+        borderRadius: '20px',
+        boxShadow: '0 32px 100px rgba(6, 9, 24, 0.42)',
         overflow: 'hidden',
+        transition: 'none',
       },
     },
-    loadCSS: [new URL('timepad-widget.css', document.baseURI).href],
+    loadCSS: [new URL('timepad-widget.css?v=7', document.baseURI).href],
+    bindEvents: { postRepaint: 'styleAiNativeTimepadForm' },
     locale: 'ru',
     utmForward: true,
   };
@@ -122,6 +182,12 @@ function initRegistration() {
 
   links.forEach((link) => {
     link.href = TIMEPAD_EVENT_URL;
+    link.addEventListener('click', (event) => {
+      if (isTimepadWidgetReady()) return;
+
+      event.preventDefault();
+      openTimepadWhenReady(link, showToast);
+    });
   });
   loadTimepadWidget(eventId, showToast);
 }

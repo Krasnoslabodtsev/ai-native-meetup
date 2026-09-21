@@ -1,7 +1,7 @@
 :root {
   --color-ink: #10113d;
   --color-ink-soft: #30365d;
-  --color-muted: #6e759a;
+  --color-muted: #656d92;
   --color-paper: #f8f9ff;
   --color-surface: rgba(255, 255, 255, 0.78);
   --color-line: rgba(83, 91, 161, 0.16);
@@ -82,7 +82,7 @@ a {
 }
 
 :focus-visible {
-  outline: 3px solid rgba(66, 201, 255, 0.9);
+  outline: 3px solid var(--color-accent-deep);
   outline-offset: 4px;
   border-radius: 6px;
 }

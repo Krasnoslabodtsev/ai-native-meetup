@@ -34,12 +34,26 @@ test('marks a valid event URL live', () => {
 });
 
 test('loads the branded stylesheet into the live Timepad popup', async () => {
-  const links = [{ href: '', addEventListener() {} }];
+  let queuedCallback;
+  let registrationClickHandler;
+  let replayedClicks = 0;
+  const links = [{
+    href: '',
+    dataset: {},
+    addEventListener(type, handler) {
+      if (type === 'click') registrationClickHandler = handler;
+    },
+    click() {
+      replayedClicks += 1;
+    },
+  }];
   let widgetScript;
 
   globalThis.window = {
     clearTimeout() {},
-    setTimeout() {},
+    setTimeout(callback) {
+      queuedCallback = callback;
+    },
   };
   globalThis.document = {
     baseURI: 'https://example.github.io/ai-native-meetup/',
@@ -68,12 +82,44 @@ test('loads the branded stylesheet into the live Timepad popup', async () => {
     const config = Function(`return ${widgetScript.textContent.trim()}`)();
 
     assert.deepEqual(config.loadCSS, [
-      'https://example.github.io/ai-native-meetup/timepad-widget.css',
+      'https://example.github.io/ai-native-meetup/timepad-widget.css?v=7',
     ]);
-    assert.equal(config.popup.width, 640);
+    assert.equal(config.hidePreloading, false);
+    assert.equal(config.popup.width, 860);
     assert.equal(config.popup.padding, 0);
     assert.equal(config.popup.margins, undefined);
     assert.equal(config.popup.outerClose, false);
+    assert.equal(config.popup.tintColor, 'rgba(13, 16, 34, 0.9)');
+    assert.equal(config.popup.closeCss.top, '26px');
+    assert.equal(config.popup.closeCss.right, '28px');
+    assert.equal(config.popup.addCss.transition, 'none');
+    assert.deepEqual(config.bindEvents, { postRepaint: 'styleAiNativeTimepadForm' });
+
+    const placeholders = {};
+    window.styleAiNativeTimepadForm.call({
+      $$(selector) {
+        return {
+          attr(name, value) {
+            placeholders[selector] = { name, value };
+          },
+        };
+      },
+    });
+    assert.deepEqual(placeholders, {
+      'input[name$="[mail]"]': { name: 'placeholder', value: 'example@mail.ru' },
+      'input[name$="[surname]"]': { name: 'placeholder', value: 'Иванов' },
+      'input[name$="[name]"]': { name: 'placeholder', value: 'Иван' },
+    });
+
+    let prevented = false;
+    registrationClickHandler({ preventDefault() { prevented = true; } });
+    assert.equal(prevented, true);
+    assert.equal(replayedClicks, 0);
+
+    window.TWF2 = { getWidget: () => ({ isReady: true }) };
+    queuedCallback();
+    assert.equal(replayedClicks, 1);
+
     await assert.doesNotReject(access(new URL('../timepad-widget.css', import.meta.url)));
   } finally {
     delete globalThis.document;

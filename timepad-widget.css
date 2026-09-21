@@ -2,11 +2,11 @@
 
 :root {
   --meetup-ink: #10113d;
-  --meetup-muted: #6e759a;
+  --meetup-muted: #656d92;
   --meetup-line: #dfe2f0;
-  --meetup-paper: #f8f9ff;
-  --meetup-accent: #5f52ff;
-  --meetup-accent-deep: #4937f2;
+  --meetup-soft: #f4f5fc;
+  --meetup-accent: #6548ff;
+  --meetup-accent-deep: #5135f5;
 }
 
 html,
@@ -31,20 +31,19 @@ textarea {
 
 .i-page {
   box-sizing: border-box;
-  padding: 24px 26px 26px;
+  padding: 40px 32px 18px;
 }
 
-.b-unit__header_size_small {
-  margin: 0 0 14px;
-  color: var(--meetup-ink);
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  line-height: 1.3;
+.i-page > .b-registration__section:first-child {
+  margin-bottom: 0;
+}
+
+#eventreg_form {
+  margin: 0;
 }
 
 .b-registration__section {
-  margin-bottom: 18px;
+  margin: 0 0 26px;
 }
 
 .b-registration__section_indent {
@@ -52,58 +51,125 @@ textarea {
   padding-left: 0 !important;
 }
 
+.b-unit__header_size_small {
+  margin: 0 0 20px;
+  color: var(--meetup-ink);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+
+#tickets-header {
+  padding-right: 54px;
+}
+
 .b-reg-table {
   overflow: hidden;
   border: 1px solid var(--meetup-line);
-  border-radius: 16px;
+  border-radius: 17px;
   background: #fff;
 }
 
-.b-reg-table__row {
+.b-reg-table .b-reg-table__row {
   box-sizing: border-box;
+  display: flex !important;
+  width: 100%;
   margin: 0 !important;
-  padding: 3px 8px;
+  padding: 0 20px;
+  align-items: center;
   background: #fff !important;
 }
 
-.b-reg-table__row + .b-reg-table__row {
-  border-top: 1px solid #e9ebf5;
+.b-reg-table .b-reg-table__row + .b-reg-table__row {
+  border-top: 1px solid #e8eaf4;
 }
 
-.b-reg-table__row_header {
+.b-reg-table .b-reg-table__row_header {
+  min-height: 48px;
   color: var(--meetup-muted);
-  background: #f4f5fc !important;
+  background: var(--meetup-soft) !important;
+}
+
+.b-reg-table__row:not(.b-reg-table__row_header):not(:last-child) {
+  min-height: 82px;
+}
+
+.b-reg-table__row:last-child {
+  min-height: 50px;
+  background: #f1f2fb !important;
+}
+
+.b-reg-table [class*="span"] {
+  min-height: 0;
+  margin-left: 0 !important;
+  float: none !important;
+}
+
+.b-reg-table__cell-name {
+  width: 70% !important;
+}
+
+.b-reg-table__cell-price {
+  display: none !important;
+}
+
+.b-reg-table__cell-count {
+  width: 30% !important;
+  margin-left: auto !important;
+  text-align: center;
+}
+
+.b-reg-table__row:last-child .b-reg-table__cell {
+  width: 100% !important;
 }
 
 .b-reg-table__header {
+  margin: 0;
   color: var(--meetup-muted);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
 }
 
-.b-reg-table__text {
+.b-reg-table__cell-name > label.b-reg-table__text {
+  display: block;
+  margin: 0;
   color: var(--meetup-ink);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.25;
 }
 
-.b-reg-table__price-mobile,
-.b-not-bold,
-.selectedTicketsInfo {
+.b-reg-table__price-mobile {
+  display: block !important;
+  margin-top: 5px;
   color: var(--meetup-muted);
+  font-size: 15px;
   font-weight: 600;
+  line-height: 1.25;
+}
+
+.b-reg-table__plusminus {
+  display: flex !important;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
 }
 
 .b-reg-table__plusminus_btn {
-  width: 38px;
-  height: 38px;
+  width: 44px !important;
+  height: 44px !important;
+  padding: 0 !important;
   border: 0 !important;
-  border-radius: 11px !important;
-  color: var(--meetup-accent-deep) !important;
-  background: #efefff !important;
-  transition: background 160ms ease, transform 160ms ease;
+  border-radius: 12px !important;
+  color: var(--meetup-ink) !important;
+  background: #eceef4 !important;
+  transition: background 150ms ease, transform 150ms ease;
 }
 
 .b-reg-table__plusminus_btn:hover {
-  background: #e3e1ff !important;
+  background: #e3e4ee !important;
   transform: translateY(-1px);
 }
 
@@ -112,26 +178,34 @@ textarea {
 }
 
 .b-reg-table__plusminus-value {
+  min-width: 22px;
   color: var(--meetup-ink);
+  font-size: 18px;
   font-weight: 800;
+  line-height: 1;
+  text-align: center;
+}
+
+.selectedTicketsInfo {
+  color: #4f50a1;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .twf2-branding {
-  margin-top: 8px;
-  opacity: 0.42;
+  margin-top: 16px;
+  opacity: 0.52;
+  text-align: right;
 }
 
-.b-registration__question {
-  margin-bottom: 7px;
-  color: var(--meetup-ink);
-  font-size: 13px;
-  font-weight: 700;
+.b-attendees {
+  margin-bottom: 28px;
 }
 
 .b-attendee {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 20px 18px;
 }
 
 .b-attendee > .row-fluid {
@@ -147,147 +221,226 @@ textarea {
   margin-bottom: 0 !important;
 }
 
+.b-registration__question {
+  margin-bottom: 11px;
+  color: var(--meetup-ink);
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  line-height: 1.3;
+}
+
+.b-registration__question_mandatory {
+  color: #ef263c;
+}
+
 input.b-input,
 select.b-input,
 textarea.b-input {
   box-sizing: border-box;
   width: 100%;
-  min-height: 48px;
-  padding: 11px 14px;
+  height: 54px !important;
+  min-height: 54px !important;
+  padding: 13px 16px !important;
   border: 1px solid var(--meetup-line) !important;
   border-radius: 12px !important;
   outline: 0;
+  color: var(--meetup-ink);
   background: #fff !important;
   box-shadow: none !important;
-  font-size: 15px;
-  transition: border-color 160ms ease, box-shadow 160ms ease;
+  font-size: 16px !important;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+input.b-input::placeholder,
+textarea.b-input::placeholder {
+  color: #697293;
+  opacity: 1;
 }
 
 input.b-input:focus,
 select.b-input:focus,
 textarea.b-input:focus {
   border-color: var(--meetup-accent) !important;
-  box-shadow: 0 0 0 3px rgba(95, 82, 255, 0.12) !important;
+  box-shadow: 0 0 0 3px rgba(101, 72, 255, 0.12) !important;
 }
 
 .b-payment__methods {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .b-payment__methods > .b-registration__header {
   grid-column: 1 / -1;
-  margin-bottom: 4px;
+  margin: 0 0 4px;
 }
 
 .b-payment__method {
+  position: relative;
   box-sizing: border-box;
   display: flex !important;
   min-width: 0;
-  min-height: 84px;
+  min-height: 128px;
   margin: 0 !important;
-  padding: 14px !important;
+  padding: 22px 24px !important;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
   align-items: flex-start;
   justify-content: center;
+  overflow: hidden;
   border: 1px solid var(--meetup-line) !important;
-  border-radius: 14px !important;
+  border-radius: 15px !important;
   color: var(--meetup-ink);
   background: #fff !important;
   cursor: pointer;
-  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 
 .b-payment__method:hover {
-  border-color: rgba(95, 82, 255, 0.45) !important;
+  border-color: rgba(101, 72, 255, 0.52) !important;
   transform: translateY(-1px);
+}
+
+.b-payment__method:focus-within {
+  outline: 3px solid var(--meetup-accent);
+  outline-offset: 2px;
+}
+
+.b-payment__method-input {
+  position: absolute !important;
+  visibility: visible !important;
+  opacity: 0 !important;
+  pointer-events: none;
 }
 
 .b-payment__method-active {
   border-color: var(--meetup-accent) !important;
-  background: #f4f2ff !important;
-  box-shadow: 0 0 0 2px rgba(95, 82, 255, 0.1);
+  background: #f7f5ff !important;
+  box-shadow: inset 0 0 0 1px var(--meetup-accent);
+}
+
+.b-payment__method-active::after {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--meetup-accent);
+  box-shadow: 0 8px 20px rgba(101, 72, 255, 0.28);
+  content: "✓";
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .b-payment__method-icon {
-  width: 32px;
-  height: 27px;
+  width: 36px;
+  height: 32px;
   object-fit: contain;
   object-position: left center;
 }
 
 .b-payment__method-label {
+  max-width: 170px;
   color: var(--meetup-ink);
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 650;
-  line-height: 1.3;
+  line-height: 1.35;
+}
+
+.section-submit:not(.js-section-submit) {
+  margin-bottom: 28px;
 }
 
 .b-registration__check {
-  margin: 0 0 12px !important;
+  margin: 0 0 16px !important;
+}
+
+.b-registration__check:last-child {
+  margin-bottom: 0 !important;
 }
 
 .b-registration__accept {
   display: grid !important;
-  grid-template-columns: 18px minmax(0, 1fr);
-  gap: 9px;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 14px;
   align-items: start;
-  color: #5f6587;
-  font-size: 12px;
+  color: #565e7d;
+  font-size: 14px;
   line-height: 1.5;
 }
 
 .b-registration__accept input {
-  width: 16px;
-  height: 16px;
-  margin: 2px 0 0;
-  accent-color: var(--meetup-accent);
+  box-sizing: border-box;
+  width: 26px;
+  height: 26px;
+  margin: 0;
+  appearance: none;
+  border: 2px solid #737b99;
+  border-radius: 5px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.b-registration__accept input:checked {
+  border-color: var(--meetup-accent);
+  background-color: var(--meetup-accent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='m4 10 4 4 8-9' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-position: center;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  box-shadow: 0 6px 16px rgba(101, 72, 255, 0.24);
+}
+
+.b-registration__accept input:focus-visible {
+  outline: 3px solid var(--meetup-accent);
+  outline-offset: 2px;
 }
 
 .b-registration__accept a {
-  color: var(--meetup-accent-deep);
+  color: var(--meetup-accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
 }
 
-.section-submit:not(.js-section-submit) .b-registration__check:first-child {
-  opacity: 0.68;
+.js-section-submit {
+  margin: 0 !important;
 }
 
-.b-pro-wiget__reg-button,
-.b-pro-wiget__button,
-.b-pro-widget__default-btn {
+.b-pro-wiget__reg-button {
   box-sizing: border-box;
-  min-height: 52px;
+  height: 64px;
+  min-height: 64px;
+  padding: 0 !important;
   border: 0 !important;
-  border-radius: 13px !important;
+  border-radius: 14px !important;
   color: #fff !important;
-  background: var(--meetup-accent) !important;
-  box-shadow: 0 12px 28px rgba(89, 72, 255, 0.24);
-  font-size: 14px;
+  background: linear-gradient(120deg, #6849ff 0%, #5738f4 100%) !important;
+  box-shadow: 0 14px 32px rgba(88, 57, 244, 0.24);
+  font-size: 18px;
   font-weight: 800;
-  line-height: 52px;
+  line-height: 64px;
   text-shadow: none !important;
-  transition: background 160ms ease, transform 160ms ease;
+  transition: box-shadow 150ms ease, filter 150ms ease, transform 150ms ease;
 }
 
 .b-pro-wiget__reg-button {
   width: 100%;
 }
 
-.b-pro-wiget__reg-button:not(.disabled):hover,
-.b-pro-wiget__button:hover,
-.b-pro-widget__default-btn:hover {
-  background: var(--meetup-accent-deep) !important;
+.b-pro-wiget__reg-button:hover {
+  filter: brightness(0.97);
   transform: translateY(-1px);
+  box-shadow: 0 17px 36px rgba(88, 57, 244, 0.3);
 }
 
 .b-pro-wiget__reg-button.disabled {
-  color: #8186a0 !important;
-  background: #e2e4ee !important;
-  box-shadow: none;
+  color: rgba(255, 255, 255, 0.88) !important;
+  cursor: not-allowed;
 }
 
 .b-registration__error,
@@ -305,13 +458,45 @@ textarea.b-input:focus {
 
 .confirmation-title {
   color: var(--meetup-ink);
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 800;
   letter-spacing: -0.025em;
 }
 
 .confirmation-description {
   color: var(--meetup-muted);
+  font-size: 14px;
+}
+
+.confirmation-btns {
+  display: grid !important;
+  width: min(100%, 340px);
+  margin: 18px auto 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.confirmation-btns > a {
+  box-sizing: border-box;
+  display: flex !important;
+  width: 100%;
+  min-height: 52px;
+  margin: 0 !important;
+  padding: 12px !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px !important;
+  font-size: 15px !important;
+  font-weight: 700;
+  line-height: 1.2 !important;
+  text-decoration: none;
+}
+
+.confirmation-btn__proceed {
+  border: 1px solid var(--meetup-accent) !important;
+  color: #fff !important;
+  background: var(--meetup-accent) !important;
+  box-shadow: 0 10px 24px rgba(88, 57, 244, 0.22);
 }
 
 .confirmation-btn__close {
@@ -326,37 +511,116 @@ textarea.b-input:focus {
   background: #f4f2ff !important;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 700px) {
   .i-page {
-    padding: 21px 16px 24px;
+    padding: 32px 16px 18px;
   }
 
   .b-unit__header_size_small {
-    font-size: 17px;
+    margin-bottom: 16px;
+    font-size: 21px;
   }
 
-  .b-payment__methods {
-    grid-template-columns: 1fr;
+  #tickets-header {
+    padding-right: 42px;
+  }
+
+  .b-reg-table .b-reg-table__row {
+    padding-inline: 15px;
+  }
+
+  .b-reg-table__cell-name {
+    width: 58% !important;
+  }
+
+  .b-reg-table__cell-count {
+    width: 42% !important;
+  }
+
+  .b-reg-table__plusminus {
+    gap: 10px;
+  }
+
+  .b-reg-table__plusminus_btn {
+    width: 40px !important;
+    height: 40px !important;
   }
 
   .b-attendee {
     grid-template-columns: 1fr;
+    gap: 22px;
   }
 
   .b-attendee > .row-fluid:first-child {
     grid-column: auto;
   }
 
+  input.b-input,
+  select.b-input,
+  textarea.b-input {
+    height: 50px !important;
+    min-height: 50px !important;
+    padding: 12px 14px !important;
+    font-size: 16px;
+  }
+
+  .b-payment__methods {
+    grid-template-columns: 1fr;
+  }
+
   .b-payment__method {
-    min-height: 66px;
-    padding: 11px 14px !important;
+    min-height: 70px;
+    padding: 14px 16px !important;
     flex-direction: row;
-    gap: 13px;
+    gap: 16px;
     align-items: center;
   }
 
+  .b-payment__method-active::after {
+    top: 50%;
+    right: 18px;
+    width: 30px;
+    height: 30px;
+    transform: translateY(-50%);
+    font-size: 18px;
+  }
+
   .b-payment__method-label {
-    font-size: 14px;
+    padding-right: 34px;
+    font-size: 16px;
+  }
+
+  .b-registration__accept {
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 12px;
+    font-size: 13px;
+  }
+
+  .b-registration__accept input {
+    width: 24px;
+    height: 24px;
+  }
+
+  .b-pro-wiget__reg-button {
+    height: 58px;
+    min-height: 58px;
+    font-size: 17px;
+    line-height: 58px;
+  }
+}
+
+@media (max-width: 420px) {
+  .i-page {
+    padding-inline: 14px;
+  }
+
+  .b-reg-table__cell-name > label.b-reg-table__text {
+    font-size: 16px;
+  }
+
+  .b-reg-table__price-mobile,
+  .selectedTicketsInfo {
+    font-size: 13px;
   }
 }
 
