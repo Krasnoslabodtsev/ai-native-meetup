@@ -104,7 +104,7 @@ function initRegistration() {
     links.forEach((link) => {
       link.addEventListener('click', (event) => {
         event.preventDefault();
-        showToast('Регистрация скоро откроется. Мы подключим оплату сразу после публикации события в Timepad.');
+        showToast('Регистрация скоро откроется.');
       });
     });
     return;

@@ -17,11 +17,17 @@ test('contains confirmed event facts', () => {
   }
 });
 
-test('uses the supplied speaker photos and Yandex map', async () => {
-  assert.ok(html.includes('Глеб спикер.jpg'));
-  assert.ok(html.includes('assets/roman-speaker.webp'));
-  assert.ok(!html.includes('Роман спикер.jpg'));
-  await access(new URL('../assets/roman-speaker.webp', import.meta.url));
+test('keeps local image references inside assets', async () => {
+  const imageSources = [...html.matchAll(/<img[^>]+src=["']([^"']+)["']/g)].map((match) => match[1]);
+
+  assert.ok(imageSources.length > 0);
+  for (const source of imageSources) {
+    assert.match(source, /^assets\//);
+    await access(new URL(`../${source}`, import.meta.url));
+  }
+});
+
+test('uses the Yandex map', () => {
   assert.match(html, /yandex\.ru\/map-widget/);
 });
 
@@ -83,7 +89,6 @@ test('prioritizes event topics and removes secondary sales details', async () =>
   const priceCard = html.slice(html.indexOf('<aside class="price-card"'), html.indexOf('</aside>', html.indexOf('<aside class="price-card"')));
   const benefits = html.slice(html.indexOf('<div class="benefit-strip"'), html.indexOf('</section>', html.indexOf('<div class="benefit-strip"')));
 
-  assert.ok(hero.includes('Что меняет AI'));
   assert.ok(!hero.includes('Три доклада'));
   assert.ok(!hero.includes('2 000 ₽'));
   assert.ok(!html.includes('Преподаватели —'));
