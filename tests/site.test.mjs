@@ -77,6 +77,22 @@ test('keeps supporting copy concise and links to the official Timepad policy', (
   assert.ok(!benefits.includes('Кофе-брейк'));
 });
 
+test('prioritizes event topics and removes secondary sales details', async () => {
+  const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+  const hero = html.slice(html.indexOf('<section class="hero"'), html.indexOf('<section class="section speakers-section"'));
+  const priceCard = html.slice(html.indexOf('<aside class="price-card"'), html.indexOf('</aside>', html.indexOf('<aside class="price-card"')));
+  const benefits = html.slice(html.indexOf('<div class="benefit-strip"'), html.indexOf('</section>', html.indexOf('<div class="benefit-strip"')));
+
+  assert.ok(hero.includes('Что меняет AI'));
+  assert.ok(!hero.includes('Три доклада'));
+  assert.ok(!hero.includes('2 000 ₽'));
+  assert.ok(!html.includes('Преподаватели —'));
+  assert.ok(!priceCard.includes('<ul>'));
+  assert.ok(!benefits.includes('Три доклада'));
+  assert.ok(!html.includes('timeline-break'));
+  assert.doesNotMatch(css, /\.timeline-break/);
+});
+
 test('gives the registration heading enough space and contains the map grid', async () => {
   const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
 
