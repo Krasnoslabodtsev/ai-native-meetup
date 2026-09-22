@@ -4,6 +4,15 @@ import assert from 'node:assert/strict';
 
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 
+function getTagContent(tagName, attributeName, attributeValue) {
+  const escapedValue = attributeValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const tag = html.match(
+    new RegExp(`<${tagName}\\b(?=[^>]*\\b${attributeName}=["']${escapedValue}["'])[^>]*>`, 'i'),
+  )?.[0];
+
+  return tag?.match(/\bcontent=["']([^"']*)["']/i)?.[1];
+}
+
 test('contains every required section and registration hooks', () => {
   for (const id of ['event', 'speakers', 'program', 'registration', 'venue']) {
     assert.match(html, new RegExp(`id=["']${id}["']`));
@@ -15,6 +24,49 @@ test('contains confirmed event facts', () => {
   for (const text of ['7 ноября 2026', '12:30', '2 000 ₽', 'Каланчевская улица, 17']) {
     assert.ok(html.includes(text), `missing: ${text}`);
   }
+});
+
+test('exposes an absolute social preview and indexable canonical page', async () => {
+  const canonical = html.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i)?.[1];
+  const coverUrl = 'https://ai-native-meetup.ru/assets/timepad-cover-1920x1080.png';
+  const cover = await readFile(new URL('../assets/timepad-cover-1920x1080.png', import.meta.url));
+
+  assert.equal(canonical, 'https://ai-native-meetup.ru/');
+  assert.equal(getTagContent('meta', 'property', 'og:url'), canonical);
+  assert.equal(getTagContent('meta', 'property', 'og:image'), coverUrl);
+  assert.equal(getTagContent('meta', 'property', 'og:image:width'), '1920');
+  assert.equal(getTagContent('meta', 'property', 'og:image:height'), '1080');
+  assert.equal(getTagContent('meta', 'name', 'twitter:card'), 'summary_large_image');
+  assert.equal(getTagContent('meta', 'name', 'twitter:image'), coverUrl);
+  assert.match(getTagContent('meta', 'name', 'robots') ?? '', /index,\s*follow/);
+  assert.match(getTagContent('meta', 'name', 'robots') ?? '', /max-image-preview:large/);
+  assert.equal(cover.readUInt32BE(16), 1920);
+  assert.equal(cover.readUInt32BE(20), 1080);
+});
+
+test('describes the public event consistently to search crawlers', async () => {
+  const canonical = 'https://ai-native-meetup.ru/';
+  const jsonLdBlocks = [...html.matchAll(/<script\s+type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/gi)]
+    .map((match) => JSON.parse(match[1]));
+  const event = jsonLdBlocks.find((item) => item['@type'] === 'Event');
+  const [robots, sitemap] = await Promise.all([
+    readFile(new URL('../robots.txt', import.meta.url), 'utf8').catch(() => ''),
+    readFile(new URL('../sitemap.xml', import.meta.url), 'utf8').catch(() => ''),
+  ]);
+
+  assert.ok(event);
+  assert.equal(event.name, 'AI-native Meetup Moscow');
+  assert.equal(event.startDate, '2026-11-07T12:30:00+03:00');
+  assert.equal(event.endDate, '2026-11-07T17:20:00+03:00');
+  assert.equal(event.location?.name, 'Photoplay');
+  assert.equal(event.location?.address?.streetAddress, 'Каланчевская улица, 17, 1-й подъезд, 6-й этаж');
+  assert.equal(event.offers?.url, 'https://ai-v-dele.timepad.ru/event/4211218/');
+  assert.equal(event.offers?.price, 2000);
+  assert.equal(event.offers?.priceCurrency, 'RUB');
+  assert.match(robots, /^User-agent: \*$/m);
+  assert.match(robots, /^Allow: \/$/m);
+  assert.match(robots, new RegExp(`^Sitemap: ${canonical}sitemap\\.xml$`, 'm'));
+  assert.ok(sitemap.includes(`<loc>${canonical}</loc>`));
 });
 
 test('keeps local image references inside assets', async () => {
@@ -42,6 +94,13 @@ test('includes responsive and accessibility states', async () => {
 
 test('versions the site stylesheet so popup chrome is refreshed', () => {
   assert.match(html, /href=["']styles\.css\?v=3["']/);
+});
+
+test('preloads the CSS hero image used for largest contentful paint', () => {
+  assert.match(
+    html,
+    /<link\s+rel=["']preload["']\s+as=["']image["']\s+href=["']assets\/hero-moscow\.webp["'][^>]*fetchpriority=["']high["']/,
+  );
 });
 
 test('opens the mobile navigation when the data-open attribute is present', async () => {
