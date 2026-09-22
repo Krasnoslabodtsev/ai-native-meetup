@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600&display=swap");
+
+.i-page {
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+#eventreg_form,
+#eventreg_form > .b-registration__section,
+#eventreg_form > .twf2-branding {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+#tickets-header,
+.b-payment__methods > .b-registration__header {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.js-section-selectTickets,
+.section-ank {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.twf2-branding {
+  margin-top: 10px;
+  margin-bottom: 24px;
+}
+
+.section-ank,
+#eventreg_form > .section-submit {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.b-attendee {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.b-attendee > .row-fluid,
+.b-reg-row {
+  width: 100%;
+  margin: 0;
+}
+
+#eventreg_form .b-attendee .b-reg-row {
+  margin-bottom: 0 !important;
+}
+
+#eventreg_form .b-attendee input[type="text"],
+#eventreg_form .b-attendee input[type="email"] {
+  border-color: #cdd3e3 !important;
+  background-color: #fbfcff !important;
+}
+
+#eventreg_form .b-attendee input[type="text"]:focus,
+#eventreg_form .b-attendee input[type="email"]:focus {
+  border-color: #6952ff !important;
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(105, 82, 255, 0.12);
+}
+
+.b-payment__methods {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+#eventreg_form .b-payment__methods > .b-registration__header {
+  grid-column: 1 / -1;
+  margin: 0 0 4px;
+}
+
+.b-payment__methods > .b-payment__method {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+}
+
+.b-payment__method-label {
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+#eventreg_form .selectedTicketsInfo {
+  font-weight: 400 !important;
+}
+
+.b-reg-table__plusminus_btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.b-reg-table__plusminus_btn svg {
+  display: none;
+}
+
+.b-reg-table__plusminus_btn::before {
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.js-plusminus_minus::before {
+  content: "−";
+}
+
+.js-plusminus_plus::before {
+  content: "+";
+}
+
+#eventreg_form > .section-submit {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.b-registration__check + .b-registration__check {
+  margin-top: 12px;
+}
+
+#eventreg_submit {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.twf-popup-closing-confirmation .confirmation-cont {
+  top: 0 !important;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+  padding: 72px 24px 24px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.confirmation-btns {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.confirmation-btns > a {
+  box-sizing: border-box;
+  display: inline-flex;
+  width: 140px;
+  height: 38px;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirmation-btns > .confirmation-btn__close {
+  margin-left: 0 !important;
+}
+
+@media (min-width: 560px) {
+  .i-page {
+    padding: 24px;
+  }
+
+  .b-attendee {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .b-attendee > .row-fluid:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .b-payment__methods {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .b-payment__methods > .b-payment__method {
+    display: flex;
+    height: 120px;
+    padding: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .b-payment__method-icon {
+    position: static;
+  }
+
+  .b-payment__method-input {
+    position: absolute;
+  }
+
+  .b-payment__method-label {
+    margin: 0;
+  }
+
+  .twf-popup-closing-confirmation .confirmation-cont {
+    padding: 24px;
+    justify-content: center;
+  }
+}

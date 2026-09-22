@@ -62,16 +62,11 @@ function createToast() {
   };
 }
 
-function styleAiNativeTimepadForm() {
-  const placeholders = {
-    'input[name$="[mail]"]': 'example@mail.ru',
-    'input[name$="[surname]"]': 'Иванов',
-    'input[name$="[name]"]': 'Иван',
-  };
-
-  Object.entries(placeholders).forEach(([selector, placeholder]) => {
-    this.$$(selector).attr('placeholder', placeholder);
-  });
+function refineTimepadForm() {
+  this.$$('input[name="subscribe_digest"]')
+    .prop('checked', false)
+    .closest('.b-registration__check')
+    .hide();
 }
 
 function isTimepadWidgetReady() {
@@ -112,40 +107,23 @@ function openTimepadWhenReady(link, showToast) {
 function loadTimepadWidget(eventId, showToast) {
   if (document.querySelector('[data-timepad-widget-v2="event_register"]')) return;
 
-  window.styleAiNativeTimepadForm = styleAiNativeTimepadForm;
+  window.refineTimepadForm = refineTimepadForm;
   const config = {
     event: { id: eventId },
     hidePreloading: false,
     display: 'popup',
     popup: {
       triggerSelector: '.js-timepad',
-      width: 860,
-      padding: 0,
+      width: 680,
       autoShrink: true,
       minViewport: 320,
-      tintColor: 'rgba(13, 16, 34, 0.9)',
-      outerClose: false,
-      closeColor: '#30365d',
-      closeCss: {
-        top: '26px',
-        right: '28px',
-        height: '32px',
-        fontSize: '40px',
-        fontWeight: '300',
-        lineHeight: '28px',
-        opacity: '0.82',
-      },
       addCss: {
-        boxSizing: 'border-box',
-        border: '1px solid rgba(229, 231, 243, 0.9)',
-        borderRadius: '20px',
-        boxShadow: '0 32px 100px rgba(6, 9, 24, 0.42)',
+        borderRadius: '18px',
         overflow: 'hidden',
-        transition: 'none',
       },
     },
-    loadCSS: [new URL('timepad-widget.css?v=7', document.baseURI).href],
-    bindEvents: { postRepaint: 'styleAiNativeTimepadForm' },
+    loadCSS: [new URL('timepad-layout.css?v=5', document.baseURI).href],
+    bindEvents: { postRepaint: 'refineTimepadForm' },
     locale: 'ru',
     utmForward: true,
   };

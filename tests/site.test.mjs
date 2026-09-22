@@ -40,6 +40,10 @@ test('includes responsive and accessibility states', async () => {
   assert.match(css, /--color-accent:/);
 });
 
+test('versions the site stylesheet so popup chrome is refreshed', () => {
+  assert.match(html, /href=["']styles\.css\?v=3["']/);
+});
+
 test('opens the mobile navigation when the data-open attribute is present', async () => {
   const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
 
@@ -81,6 +85,15 @@ test('keeps supporting copy concise and links to the official Timepad policy', (
   const benefits = html.slice(html.indexOf('<div class="benefit-strip"'), html.indexOf('</section>', html.indexOf('<div class="benefit-strip"')));
   assert.ok(benefits.includes('Открытый микрофон'));
   assert.ok(!benefits.includes('Кофе-брейк'));
+});
+
+test('shows only the personal site for Gleb while keeping Roman\'s Stepik link', () => {
+  const glebCard = html.slice(html.indexOf('alt="Глеб Учитель"'), html.indexOf('</article>', html.indexOf('alt="Глеб Учитель"')));
+  const romanCard = html.slice(html.indexOf('alt="Роман Краснослабодцев"'), html.indexOf('</article>', html.indexOf('alt="Роман Краснослабодцев"')));
+
+  assert.ok(glebCard.includes('https://glebteach.ru/'));
+  assert.ok(!glebCard.includes('stepik.org'));
+  assert.ok(romanCard.includes('https://stepik.org/users/484739266/teach'));
 });
 
 test('prioritizes event topics and removes secondary sales details', async () => {
